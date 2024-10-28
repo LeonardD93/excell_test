@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
 
     public function index(){
-        $orders = Order::with('customer', 'items.product', 'cartItems')->get(); // to add ti the model cart items relationship
+        $orders = Order::with('customer', 'items.product', 'cartItems')->get();
         $orderData = [];
 
         foreach ($orders as $order) {

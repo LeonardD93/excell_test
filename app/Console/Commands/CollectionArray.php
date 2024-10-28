@@ -49,15 +49,16 @@ class CollectionArray extends Command
         // ];
 
         $output2 = collect($offices)
-        ->groupBy('city')
-        ->mapWithKeys(function ($offices, $city) use ($employees) {
-            return [
-                $city => $offices->mapWithKeys(function ($office) use ($employees, $city) {
-                $officeEmployees = collect($employees)->where('city', $city)->pluck('name')->toArray();
-                return [$office['office'] => $officeEmployees];
-            })];
-        })
-        ->toArray();
+            ->groupBy('city')
+            ->mapWithKeys(function ($offices, $city) use ($employees) {
+                return [
+                    $city => $offices->mapWithKeys(function ($office) use ($employees, $city) {
+                        $officeEmployees = collect($employees)->where('city', $city)->pluck('name')->toArray();
+                        return [$office['office'] => $officeEmployees];
+                    })
+                ];
+            })
+            ->toArray();
 
         print_r($output2);
     }
